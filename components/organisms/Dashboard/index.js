@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
     extendedIcon: {
         marginRight: theme.spacing(1),
     },
+    fab: {
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2)
+    }
 }));
 
 
@@ -22,7 +27,8 @@ export default function Dashboard(props) {
         <>
             <h1>Welcome {props.sessionData.name}</h1>
             <Fab
-                href = {props.href}
+                href={props.href}
+                className={classes.fab}
                 variant="extended"
                 color="primary"
                 aria-label="add survey">
