@@ -1,21 +1,17 @@
 import React from 'react';
-import Dashboard from '../components/organisms/Dashboard';
+import Surveys from '../components/organisms/Surveys';
 import Header from '../components/organisms/Header';
 import { getSessionInfo } from '../utils';
 
-export default function HomePage() {
+export default function Survey() {
     const { handleSignIn, signInText = '', session = null } = getSessionInfo();
     return (
-        <div className={''}>
+        <div className={'survey-container'}>
             <Header
-                componentName={'DashBoard'}
+                componentName={'Surveys'}
                 handleSignIn={handleSignIn}
                 text={signInText} />
-            {session &&
-                <Dashboard
-                    sessionData={session.user}
-                    href={'/create-survey'}
-                />}
+            {session && <Surveys sessionData={session.user} />}
         </div>
     );
 }
