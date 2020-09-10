@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/globals.css';
 import { Provider } from 'next-auth/client';
 import Head from 'next/head';
-import Header from '../components/organisms/Header';
 
 export default function App({ Component, pageProps }) {
   return (
