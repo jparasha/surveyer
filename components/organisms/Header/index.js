@@ -7,15 +7,17 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
+
     root: {
         flexGrow: 1,
     },
+    appBar: {
+        background: '#ac96db',
+        color: '#2f2727'
+    },
     menuButton: {
         marginRight: theme.spacing(2),
-    },
-    title: {
-        flex: 1,
     },
     flexContainer: {
         display: 'flex',
@@ -30,7 +32,7 @@ export default function ButtonAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <HomeIcon />
