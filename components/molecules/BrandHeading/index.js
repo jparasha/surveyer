@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '5% 5% 1% 5%'
     },
     special: {
-        color: '#855cdf',
+        color: '#ac96db',
         fontSize: 36,
         fontStyle: 'italic',
         margin: '0',
