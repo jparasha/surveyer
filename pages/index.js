@@ -1,7 +1,7 @@
 import React from 'react';
 import Dashboard from '../components/organisms/Dashboard';
 import Header from '../components/organisms/Header';
-import { getSessionInfo } from '../utils';
+import { getSessionInfo } from '../components/utils';
 
 export default function HomePage() {
     const { handleSignIn, signInText = '', session = null } = getSessionInfo();
