@@ -14,7 +14,7 @@ export default function HomePage() {
             {session &&
                 <Dashboard
                     sessionData={session.user}
-                    href={'/create-survey'}
+                    href={'/surveys'}
                 />}
         </div>
     );
