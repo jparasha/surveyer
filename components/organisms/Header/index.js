@@ -33,7 +33,7 @@ export default function ButtonAppBar(props) {
 
     return (
         <div className={classes.root} style={{ marginBottom: 65 }}>
-            <AppBar position="fixed" className={classes.appBar} style={{ background: '#ac96db', color: '#2f2727', padding: '1%' }}>
+            <AppBar position="fixed" className={classes.appBar} style={{ background: '#ac96db', color: '#2f2727', padding: '5px 0' }}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" href={'/'}>
                         <HomeIcon />
