@@ -27,7 +27,7 @@ export default function AutoGrid() {
                 <Grid item lg={6} xs={12} md={6}>
                     <CardComponent
                         imagePath={'/assets/images/orange-edit.jpg'}
-                        imageTitle='choose template'
+                        imageTitle='create own'
                     />
                 </Grid>
             </Grid>
