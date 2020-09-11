@@ -22,12 +22,14 @@ export default function AutoGrid() {
                     <CardComponent
                         imagePath={'/assets/images/choose-template.jpg'}
                         imageTitle='choose template'
+                        href={'/surveys/templates'}
                     />
                 </Grid>
                 <Grid item lg={6} xs={12} md={6}>
                     <CardComponent
                         imagePath={'/assets/images/orange-edit.jpg'}
-                        imageTitle='choose template'
+                        imageTitle='create own'
+                        href={'/surveys/create-new'}
                     />
                 </Grid>
             </Grid>

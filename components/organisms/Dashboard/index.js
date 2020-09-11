@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => {
             position: 'fixed',
             bottom: theme.spacing(2),
             right: theme.spacing(2),
-            background: '#ac96db',
-            color: '#2f2727',
-            '&:hover': {
-                background: '#ac96db',
-                color: '#2f2727',
-            }
+            // background: '#ac96db',
+            // color: '#2f2727',
+            // '&:hover': {
+            //     background: '#ac96db',
+            //     color: '#2f2727',
+            // }
         }
     });
 });
