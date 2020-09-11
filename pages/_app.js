@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/globals.css';
 import { Provider } from 'next-auth/client';
-import Head from 'next/head';
 import { orange, deepOrange } from '@material-ui/core/colors';
+import Head from 'next/head';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 

@@ -1,5 +1,5 @@
 :root {
-  --primary-color: '#121212';
+  --primary-color: '#303030';
   --primary-text-color: '#939393';
   --secondary-text-color: '#ac96db';
 }
@@ -8,6 +8,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background: #303030;
   font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
