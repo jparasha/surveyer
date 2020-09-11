@@ -5,8 +5,6 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 const useStyles = makeStyles((theme) => {
-    console.log(theme);
-    
     return ({
         root: {
             '& > *': {
@@ -32,10 +30,11 @@ const useStyles = makeStyles((theme) => {
 
 
 export default function Dashboard(props) {
+    const { name = '' } = props.sessionData || {};
     const classes = useStyles();
     return (
         <>
-            <h1>Welcome {props.sessionData.name}</h1>
+            <h1>Welcome {name}</h1>
             <Fab
                 href={props.href}
                 className={classes.fab}

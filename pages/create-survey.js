@@ -1,7 +1,7 @@
 import React from 'react';
 import Surveys from '../components/organisms/Surveys';
 import Header from '../components/organisms/Header';
-import { getSessionInfo } from '../utils';
+import { getSessionInfo } from '../components/utils';
 
 export default function Survey() {
     const { handleSignIn, signInText = '', session = null } = getSessionInfo();
