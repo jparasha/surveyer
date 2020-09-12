@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
+        width: '100%',
         flexGrow: 1,
         padding: '5%',
         display: 'flex',
@@ -19,7 +20,7 @@ export default function Creator(props) {
     return (
         <Grid container className={classes.root} spacing={3}>
             <Typography variant="h3" className={classes.titleRow} component="h1" gutterBottom>
-                benevolent
+                Create Survey from tools available!
             </Typography>
             <Typography variant="h5" className={classes.titleRow} component="h4" gutterBottom>
                 benevolent tesl jkdfs jlksjdlkfjdslf sldkfjlksdjfksljd dsfjlsdjfljsdlk slkjklj
