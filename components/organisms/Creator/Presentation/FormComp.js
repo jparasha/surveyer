@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Input from '../Presentation/input';
-import Option from '../Presentation/Option';
+import Input from '../../../atoms/Input';
+import Option from '../../../atoms/Option';
 import FORM_CONSTANTS from '../../../utils/sampleForm';
 
 const useStyles = makeStyles({

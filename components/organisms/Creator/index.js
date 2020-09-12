@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Form from './Presentation/FormComp';
 import BrandHeading from '../../molecules/BrandHeading';
-import ChipComponent from './Presentation/Chips';
-import ModalComponent from './Presentation/Modal';
+import ChipComponent from '../../atoms/Chips';
+import ModalComponent from '../../atoms/Modal';
 
 const useStyles = makeStyles({
     root: {
