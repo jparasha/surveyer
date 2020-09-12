@@ -15,12 +15,12 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Creator(props) {
+export default function Template(props) {
     const classes = useStyles();
     return (
         <Grid container className={classes.root} spacing={3}>
             <Typography variant="h3" className={classes.titleRow} component="h1" gutterBottom>
-                Create Survey from tools available!
+                Choose from Templates available!
             </Typography>
             <Typography variant="h5" className={classes.titleRow} component="h4" gutterBottom>
                 benevolent tesl jkdfs jlksjdlkfjdslf sldkfjlksdjfksljd dsfjlsdjfljsdlk slkjklj
