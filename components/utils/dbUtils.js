@@ -38,11 +38,9 @@ const insertCollection = (dataBase, data = {}) => {
         console.log(35, data, 35);
         dataBase.collection(COLLECTION_NAME).updateOne(
             { 'id': userID },
-            { templates: [$set: { formData }] },
+            { templates: [{ $set: { formData } }] },
             { upsert: true }
-        );
-        // collection.update({_id:data.id}, {$set:{scores:zz}}, function(err, result) {
-        dataBase.collection(COLLECTION_NAME).insertOne(data)
+        )
             .then(() => resolve())
             .catch(e => reject(e));
     });
