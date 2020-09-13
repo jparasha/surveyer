@@ -6,6 +6,7 @@ import Form from './Presentation/FormComp';
 import BrandHeading from '../../molecules/BrandHeading';
 import ChipComponent from '../../atoms/Chips';
 import ModalComponent from '../../atoms/Modal';
+import SnackBar from '../../atoms/SnackBar';
 import ModalForm from '../../molecules/ModalForm';
 import FORM_TEMPLATE from '../../utils/template';
 
@@ -52,6 +53,15 @@ const prepareForm = (item, type) => {
     );
 };
 
+const createUserFormData = (data, handleSnack) => {
+    const userData = {
+        userID: '',
+        data
+    };
+    console.log(userData);
+    handleSnack();
+};
+
 
 export default function Creator() {
     // state data
@@ -59,6 +69,7 @@ export default function Creator() {
     const [modalData, setModalData] = useState('');
     const [formData, setFormData] = useState({ elements: [] });
     const [isModalOpen, setModalState] = useState(false);
+    const [showSnackBar, setSnackBar] = useState(false);
 
     // handle chip click
     const manageChipState = e => {
@@ -75,6 +86,9 @@ export default function Creator() {
         setModalState(!isModalOpen);
     };
 
+    //manage snack bar
+    const handleSnack = () => setSnackBar(!showSnackBar);
+
     // manage element additions
     const modalSaveHandler = useCallback(event => {
         console.log('klk');
@@ -89,6 +103,8 @@ export default function Creator() {
 
     // reset user form
     const resetFormData = () => setFormData({ elements: [] });
+    // save form data
+    const saveFormData = () => createUserFormData(formData, handleSnack);
 
     const classes = useStyles();
     return (
@@ -100,12 +116,14 @@ export default function Creator() {
                     <Form
                         handleReset={resetFormData}
                         className={classes.item}
+                        handleSubmit={saveFormData}
                         formData={formData} /> : null}
             </Grid>
             <ModalComponent
                 isOpen={isModalOpen}>
                 {setModalForm(modalData, modalSaveHandler, handleModalState)}
             </ModalComponent>
+            {/* <SnackBar open={showSnackBar} handleClose={handleSnack} /> */}
         </>
     );
 }
