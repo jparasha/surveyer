@@ -38,11 +38,12 @@ const insertCollection = (dataBase, data = {}) => {
         console.log(35, data, 35);
         dataBase.collection(COLLECTION_NAME).updateOne(
             { userID },
-            { $set: { templates: [{ formData }] } },
+            { $set: { 'templates.$': { formData } } },
             { upsert: true }
         )
             .then(dataReturned => {
-                console.log(45, dataReturned, 45);
+                consst{ modifiedCount: 0, upsertedId: null, upsertedCount: 0, matchedCount: 0 } = dataReturned || {}
+                console.log(45, modifiedCount, upsertedId, upsertedCount, matchedCount, 45);
                 resolve();
             })
             .catch(e => reject(e));
