@@ -42,7 +42,7 @@ const insertCollection = (dataBase, data = {}) => {
             { upsert: true }
         )
             .then(dataReturned => {
-                consst{ modifiedCount: 0, upsertedId: null, upsertedCount: 0, matchedCount: 0 } = dataReturned || {}
+                const { modifiedCount = 0, upsertedId = null, upsertedCount = 0, matchedCount = 0 } = dataReturned || {};
                 console.log(45, modifiedCount, upsertedId, upsertedCount, matchedCount, 45);
                 resolve();
             })
