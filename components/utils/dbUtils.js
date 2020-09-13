@@ -79,6 +79,8 @@ export const saveToDB = userData => {
                 if (err) {
                     reject(err);
                 }
+                console.log(db, 82);
+
                 // ****************************** CALL DB **************************//
                 const dataBase = db.db(DB_NAME);
 
