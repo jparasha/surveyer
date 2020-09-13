@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -33,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal(props) {
+
     const classes = useStyles();
     return (
         <Modal
@@ -49,12 +49,7 @@ export default function TransitionsModal(props) {
         >
             <Fade in={props.isOpen}>
                 <div className={`${classes.paper} ${classes.flex}`}>
-                    <h2 id="transition-modal-title" className={classes.item}>Transition modal</h2>
-                    <p id="transition-modal-description" className={classes.item}>react-transition-group animates me.</p>
-                    <div className={`${classes.item} ${classes.flex}`}>
-                        <Button className={classes.btn} color={'primary'} variant={'outlined'} onClick={props.modalSaveHandler}>Save</Button>
-                        <Button className={classes.btn} color={'secondary'} variant={'outlined'} onClick={props.handleClose}>Close</Button>
-                    </div>
+                    {props.children}
                 </div>
             </Fade>
         </Modal>
