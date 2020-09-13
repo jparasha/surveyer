@@ -24,8 +24,8 @@ const getChips = (item, props) => {
         <Chip
             variant='default'
             size='medium'
-            avatar={<Avatar>{label[0]}</Avatar>}
-            label={label}
+            avatar={<Avatar>+</Avatar>}
+            label={label.toUpperCase()}
             onClick={handleClick}
             clickable
             style={{ backgroundColor: color }}
