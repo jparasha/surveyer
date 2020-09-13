@@ -35,7 +35,7 @@ const removeCollection = dataBase => {
 const insertCollection = (dataBase, data = []) => {
     return new Promise((resolve, reject) => {
         console.log(35, data, 35);
-        dataBase.collection(COLLECTION_NAME).insert(data)
+        dataBase.collection(COLLECTION_NAME).insertOne(data)
             .then(() => resolve())
             .catch(e => reject(e));
     });
