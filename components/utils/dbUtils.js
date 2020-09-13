@@ -41,7 +41,10 @@ const insertCollection = (dataBase, data = {}) => {
             { $set: { templates: [{ formData }] } },
             { upsert: true }
         )
-            .then(() => resolve())
+            .then(dataReturned => {
+                console.log(45, dataReturned, 45);
+                resolve();
+            })
             .catch(e => reject(e));
     });
 };
