@@ -38,7 +38,7 @@ const insertCollection = (dataBase, data = {}) => {
         console.log(35, data, 35);
         dataBase.collection(COLLECTION_NAME).updateOne(
             { userID },
-            { templates: [{ formData }] },
+            { $set: { templates: [{ formData }] } },
             { upsert: true }
         )
             .then(() => resolve())
