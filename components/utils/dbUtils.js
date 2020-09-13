@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 // environement data
-const { MONGO_URL = '', DB_NAME = 'surveyer_db', COLLECTION_NAME = 'suveyer' } = process.env || {};
+const { MONGO_URL = '', DB_NAME = 'surveyer_db', COLLECTION_NAME = 'surveyer' } = process.env || {};
 
 // read DB collection
 const readCollection = (dataBase = DB_NAME, number = '') => {
