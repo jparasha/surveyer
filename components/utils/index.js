@@ -7,3 +7,10 @@ export const getSessionInfo = () => {
     const signInText = session ? 'Sign Out' : 'Sign In';
     return ({ signInText, handleSignIn, session });
 };
+
+export const getUserId = () => {
+    const [session] = useSession();
+    const { user: { image = '' } } = session || {};
+    const match = image.match('/u/(.*)?')[1];
+    return (match.substr(0, match.indexOf('?'))) || '';
+};

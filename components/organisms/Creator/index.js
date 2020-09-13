@@ -9,6 +9,7 @@ import ModalComponent from '../../atoms/Modal';
 import SnackBar from '../../atoms/SnackBar';
 import ModalForm from '../../molecules/ModalForm';
 import FORM_TEMPLATE from '../../utils/template';
+import { getUserId } from '../../utils';
 
 const useStyles = makeStyles({
     root: {
@@ -53,12 +54,13 @@ const prepareForm = (item, type) => {
     );
 };
 
-const createUserFormData = (data, handleSnack) => {
+const createUserFormData = (data, id, resetFormData, handleSnack) => {
     const userData = {
-        userID: '',
+        userID: id,
         data
     };
     console.log(userData);
+    resetFormData();
     handleSnack();
 };
 
@@ -70,6 +72,10 @@ export default function Creator() {
     const [formData, setFormData] = useState({ elements: [] });
     const [isModalOpen, setModalState] = useState(false);
     const [showSnackBar, setSnackBar] = useState(false);
+    const [userId, setUserId] = useState('');
+
+    // conditionally add user id
+    !userId && setUserId(getUserId());
 
     // handle chip click
     const manageChipState = e => {
@@ -104,7 +110,7 @@ export default function Creator() {
     // reset user form
     const resetFormData = () => setFormData({ elements: [] });
     // save form data
-    const saveFormData = () => createUserFormData(formData, handleSnack);
+    const saveFormData = () => createUserFormData(formData, userId, resetFormData, handleSnack);
 
     const classes = useStyles();
     return (
