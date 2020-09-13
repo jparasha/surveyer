@@ -9,7 +9,7 @@ const options = {
             clientSecret: process.env.GITHUB_SECRET
         }),
         // Sign in with passwordless email link
-        Providers.Email({
+        /* Providers.Email({
             server: {
                 host: process.env.EMAIL_SERVER_HOST,
                 port: process.env.EMAIL_SERVER_PORT,
@@ -18,7 +18,7 @@ const options = {
                     pass: process.env.EMAIL_SERVER_PASSWORD
                 }
             }
-        }),
+        }), */
         // ...add more providers here
     ],
 
