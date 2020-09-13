@@ -79,18 +79,16 @@ export const saveToDB = userData => {
                 if (err) {
                     reject(err);
                 }
-                console.log(db, 82);
-
                 // ****************************** CALL DB **************************//
                 const dataBase = db.db(DB_NAME);
                 dataBase.listCollections().toArray((errd, collInfos) => {
-                    console.log(collInfos, errd);
+                    console.log(collInfos, errd, 85);
 
                 });
                 // ********************* INSERT COLLECTION *********************//
                 console.log('inserting collection');
                 insertCollection(dataBase, userData)
-                    .then((response) => {
+                    .then(() => {
                         //
                         console.log('inserted');
                         resolve();
