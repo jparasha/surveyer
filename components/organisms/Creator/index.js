@@ -9,7 +9,7 @@ import ModalComponent from '../../atoms/Modal';
 import SnackBar from '../../atoms/SnackBar';
 import ModalForm from '../../molecules/ModalForm';
 import FORM_TEMPLATE from '../../utils/template';
-import { getUserId } from '../../utils';
+import { getUserId, initiateCall } from '../../utils';
 
 const useStyles = makeStyles({
     root: {
@@ -54,6 +54,7 @@ const prepareForm = (item, type) => {
     );
 };
 
+// user form to be saved from here
 const createUserFormData = (data, id, resetFormData, handleSnack) => {
     const userData = {
         userID: id,
@@ -61,7 +62,8 @@ const createUserFormData = (data, id, resetFormData, handleSnack) => {
     };
     console.log(userData);
     resetFormData();
-    handleSnack();
+    //initiateCall(process.env.WRITE_URL, userData);
+    // handleSnack();
 };
 
 
