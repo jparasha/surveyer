@@ -37,8 +37,8 @@ const insertCollection = (dataBase, data = {}) => {
     return new Promise((resolve, reject) => {
         console.log(35, data, 35);
         dataBase.collection(COLLECTION_NAME).updateOne(
-            { 'id': userID },
-            { templates: [{ $set: { formData } }] },
+            { userID },
+            { templates: [{ formData }] },
             { upsert: true }
         )
             .then(() => resolve())
@@ -86,10 +86,10 @@ export const saveToDB = userData => {
                 }
                 // ****************************** CALL DB **************************//
                 const dataBase = db.db(DB_NAME);
-                dataBase.listCollections().toArray((errd, collInfos) => {
-                    console.log(collInfos, errd, 85);
+                // dataBase.listCollections().toArray((errd, collInfos) => {
+                //     console.log(collInfos, errd, 85);
 
-                });
+                // });
                 // ********************* INSERT COLLECTION *********************//
                 console.log('inserting collection');
                 insertCollection(dataBase, userData)
@@ -97,9 +97,11 @@ export const saveToDB = userData => {
                         //
                         console.log('inserted');
                         resolve();
-
                     })
-                    .catch(e => reject(e));
+                    .catch(e => {
+                        console.log(e);
+                        reject(e);
+                    });
             });
         } catch (error) {
             reject(error);
