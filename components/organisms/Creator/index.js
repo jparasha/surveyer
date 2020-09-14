@@ -11,6 +11,7 @@ import ModalForm from '../../molecules/ModalForm';
 import FORM_TEMPLATE from '../../utils/template';
 import { getUserId, initiateCall } from '../../utils';
 
+
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -60,15 +61,15 @@ const createUserFormData = (data, id, resetFormData, handleSnack) => {
         userID: id,
         data
     };
-    console.log(userData);
+    console.log(userData, 64);
     resetFormData();
-    initiateCall(process.env.WRITE_URL, userData);
+    initiateCall('/api/survey/save-survey', userData)
+        .then(response => console.log(response));
 };
 
 
 export default function Creator() {
     // state data
-    // const [chipState, setChipState] = useState({ input: 0, option: 0, checkbox: 0 });
     const [modalData, setModalData] = useState('');
     const [formData, setFormData] = useState({ elements: [] });
     const [isModalOpen, setModalState] = useState(false);

@@ -20,9 +20,7 @@ export const getUserId = () => {
 // initiate calls
 export const initiateCall = (url = '/api/survey/save-survey', data = null) => {
     if (ENABLE_DB) {
-        axios.get(url, {
-            query: data
-        })
+        axios.post(url, { data })
             .then(response => response)
             .catch(err => err);
     }
