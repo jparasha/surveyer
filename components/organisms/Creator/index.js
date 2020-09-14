@@ -111,6 +111,7 @@ export default function Creator() {
         <>
             <Grid container className={classes.root} spacing={3}>
                 <BrandHeading />
+                <Typography variant={'h6'} >Select an element to add</Typography>
                 <ChipComponent handleClick={manageChipState} count={3} />
                 {formData.elements.length ?
                     <Form
