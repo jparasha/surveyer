@@ -80,31 +80,23 @@ export default function Creator() {
     !userId && setUserId(getUserId());
 
     // handle chip click
-    const manageChipState = e => {
-        const { innerText = '' } = e.target || {};
-        // const element = FORM_TEMPLATE[innerText.toUpperCase()];
-        setModalData(innerText);
-        //setChipState({ ...chipState, [innerText]: chipState[innerText] + 1 });
-        handleModalState();
+    const manageChipState = component => {
+        setModalData(component);
+        (component === 'INPUT') && handleModalState();
     };
 
     // manage modal state
-    const handleModalState = () => {
-        console.log(isModalOpen, 'hanle modal');
-        setModalState(!isModalOpen);
-    };
+    const handleModalState = () => setModalState(!isModalOpen);
 
     //manage snack bar
     const handleSnack = () => setSnackBar(!showSnackBar);
 
     // manage element additions
     const modalSaveHandler = useCallback(event => {
-        console.log('klk');
-
         event.preventDefault();
         event.stopPropagation();
         handleModalState();
-        const { label = '', helper = 'test' } = event.target || {};
+        const { label = '', helper = '' } = event.target || {};
         const elementData = prepareForm({ label: label.value, helper: helper.value });
         setFormData({ elements: [...formData.elements, elementData] });
     }, []);
@@ -128,10 +120,10 @@ export default function Creator() {
                         formData={formData} /> : null}
             </Grid>
             <ModalComponent
+                handleClose={handleModalState}
                 isOpen={isModalOpen}>
                 {setModalForm(modalData, modalSaveHandler, handleModalState)}
             </ModalComponent>
-            {/* <SnackBar open={showSnackBar} handleClose={handleSnack} /> */}
         </>
     );
 }
