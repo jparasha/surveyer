@@ -20,10 +20,9 @@ const useStyles = makeStyles({
     item: {
         flexGrow: 1,
         margin: '1%',
+        width: '100%'
     },
-    btn: {
-        margin: '5%'
-    }
+
 });
 
 const getElement = (item, classes) => {
@@ -45,9 +44,9 @@ export default function ModalForm(props) {
             <p id="transition-modal-description" className={classes.item}>Please enter element data to continue</p>
             <form className={classes.flexContainer} onSubmit={props.modalSaveHandler}>
                 {modalData.map(item => getElement(item, classes))}
-                <div className={`${classes.item} ${classes.flex}`}>
-                    <Button className={classes.btn} color={'secondary'} variant={'outlined'} onClick={props.handleClose} >Close</Button>
-                    <Button className={classes.btn} color={'primary'} type={'submit'} variant={'outlined'} >Save</Button>
+                <div className={`${classes.item} ${classes.flexContainer}`} style={{ flexDirection: 'row' }}>
+                    <Button color={'secondary'} variant={'outlined'} onClick={props.handleClose} >Close</Button>
+                    <Button color={'primary'} type={'submit'} variant={'outlined'} >Save</Button>
                 </div>
             </form>
         </Grid>

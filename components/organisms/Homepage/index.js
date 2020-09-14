@@ -34,7 +34,7 @@ export default function HomepageComponent(props) {
     return (
         <Box display={'flex'} flexDirection={'column'} justifyContent="center" alignContent={'center'}>
             <BrandHeading />
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button color={'primary'} onClick={props.handleSignIn} variant={'contained'}>Login to continue!</Button>
             </div>
         </Box>
