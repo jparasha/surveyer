@@ -46,22 +46,15 @@ const prepareResponse = (query, data) => {
 
 // default contact data service
 export default (req, res) => {
-    if (req.method === 'POST') {
-        console.log(req.body);
-        // res.statusCode(200);
-        res.send({});
-    }
-
-    const { query: { number = '' } } = req;
     const date = new Date();
     console.log(`recieved req: ${date}`);
-    return new Promise((resolve, reject) => {
-
-        // if (!number) {
-        //     const responseData = prepareResponse(number, null);
-        //     getResponseFlow(res, responseData, resolve, 200);
-        // } else {
-        //     getResponseData(number, res, resolve, reject);
-        // }
-    });
+    if (req.method === 'POST') {
+        const { body = {} } = req || {};
+        console.log(body);
+        return new Promise((resolve, reject) => {
+            saveToDB(body)
+                .then(() => res.send({"status" : "success"}))
+                .catch(err => res.send({"status" : "failure"}));
+        });
+    }
 };

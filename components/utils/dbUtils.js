@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 // environement data
-const { MONGO_URL = '', DB_NAME = 'surveyer_db', COLLECTION_NAME = 'suveyer' } = process.env || {};
+const { MONGO_URL = '', DB_NAME = 'surveyer_db', COLLECTION_NAME = 'surveyer' } = process.env || {};
 
 // read DB collection
 const readCollection = (dataBase = DB_NAME, number = '') => {
@@ -32,11 +32,20 @@ const removeCollection = dataBase => {
 };
 
 //insert complete collection
-const insertCollection = (dataBase, data = []) => {
+const insertCollection = (dataBase, data = {}) => {
+    const { data: formData = {}, userID } = data || {};
     return new Promise((resolve, reject) => {
         console.log(35, data, 35);
-        dataBase.collection(COLLECTION_NAME).insert(data)
-            .then(() => resolve())
+        dataBase.collection(COLLECTION_NAME).updateOne(
+            { userID },
+            { $push: { 'templates': { formData } } },
+            { upsert: true }
+        )
+            .then(dataReturned => {
+                const { modifiedCount = 0, upsertedId = null, upsertedCount = 0, matchedCount = 0 } = dataReturned || {};
+                console.log(45, modifiedCount, upsertedId, upsertedCount, matchedCount, 45);
+                resolve();
+            })
             .catch(e => reject(e));
     });
 };
@@ -81,14 +90,22 @@ export const saveToDB = userData => {
                 }
                 // ****************************** CALL DB **************************//
                 const dataBase = db.db(DB_NAME);
+                // dataBase.listCollections().toArray((errd, collInfos) => {
+                //     console.log(collInfos, errd, 85);
 
+                // });
                 // ********************* INSERT COLLECTION *********************//
                 console.log('inserting collection');
                 insertCollection(dataBase, userData)
-                    .then((response) => {
+                    .then(() => {
                         //
+                        console.log('inserted');
+                        resolve();
                     })
-                    .catch(e => reject(e));
+                    .catch(e => {
+                        console.log(e);
+                        reject(e);
+                    });
             });
         } catch (error) {
             reject(error);
