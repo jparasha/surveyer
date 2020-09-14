@@ -16,8 +16,8 @@ export const getUserId = () => {
 };
 
 // initiate calls
-export const initiateCall = (url = '/api/survey/save-survey', data = null) => {
-    axios.post(url, { data })
+export const initiateCall = (url = '/api/survey/save-survey', data = {}) => {
+    axios.post(url, { ...data })
         .then(response => response)
         .catch(err => err);
 

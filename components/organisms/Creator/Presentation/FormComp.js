@@ -35,7 +35,7 @@ const getElement = (item, classes) => {
 
 export default function CreatorComp(props) {
     const classes = useStyles();
-    const { formData: { elements = [] } } = props || {};
+    const { formData = [] } = props || {};
     return (
         <Grid container className={classes.root} spacing={3}>
             <Typography variant={'h4'} >Preview</Typography>
@@ -44,7 +44,7 @@ export default function CreatorComp(props) {
                 <Button className={classes.item} color={'primary'} size={'large'} variant={'contained'} onClick={props.handleSubmit}>Save</Button>
             </Grid>
             <form className={classes.root} style={{ border: '2mm ridge salmon', borderRadius: 6 }}>
-                {elements.map(item => getElement(item, classes))}
+                {formData.map(item => getElement(item, classes))}
             </form>
         </Grid>
     );

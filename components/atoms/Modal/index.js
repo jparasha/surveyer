@@ -39,7 +39,7 @@ export default function TransitionsModal(props) {
             aria-describedby="transition-modal-description"
             className={classes.modal}
             open={props.isOpen}
-            onClose={props.handleClose}
+            onClose={() => props.handleClose(false)}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
