@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    rootContainer: {
         padding: '5% 5% 1% 5%'
     },
     special: {
@@ -40,7 +40,7 @@ export default function BrandHeading(props) {
     const classes = useStyles();
 
     return (<>
-        <div className={`${classes.flexContainer} ${classes.root}`}>
+        <div className={`${classes.flexContainer} ${classes.rootContainer}`}>
             <Grid container spacing={3} className={classes.flexContainer}>
                 <Typography variant={'h5'} component={'h1'} className={classes.flexContainer}>
                     <Typography component={'p'} className={classes.first}>Publish</Typography>

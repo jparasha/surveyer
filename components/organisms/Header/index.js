@@ -9,7 +9,7 @@ import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles(theme => ({
 
-    root: {
+    rootHeader: {
         flexGrow: 1,
         marginBottom: 60
     },
@@ -29,7 +29,7 @@ export default function ButtonAppBar(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root} style={{ marginBottom: 65 }}>
+        <div className={classes.rootHeader} style={{ marginBottom: 65 }}>
             <AppBar position="fixed" className={classes.appBar} style={{ padding: '5px 0' }}>
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" href={'/'}>
