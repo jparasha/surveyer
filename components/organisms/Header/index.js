@@ -32,10 +32,10 @@ export default function ButtonAppBar(props) {
         <div className={classes.rootHeader} style={{ marginBottom: 65 }}>
             <AppBar position="fixed" className={classes.appBar} style={{ padding: '5px 0' }}>
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" href={'/'}>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Home" href={'/'}>
                         <HomeIcon />
                     </IconButton>
-                    <Typography variant="h6" className={classes.flexContainer} style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                    <Typography variant="h6" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
                         {props.componentName}
                     </Typography>
                     <Button color="inherit" onClick={props.handleSignIn}>{props.text}</Button>
