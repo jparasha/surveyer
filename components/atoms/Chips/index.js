@@ -18,15 +18,17 @@ const chipTypes = ['input', 'option', 'checkbox'];
 const colors = ['salmon', 'rebeccapurple', 'orange'];
 
 const getChips = (item, props) => {
-    const { label = item || 'Primary clickable', handleClick } = props;
+    const { label = item.toUpperCase(), handleClick } = props;
     const color = colors[chipTypes.indexOf(item)];
+
     return (
         <Chip
             variant='default'
             size='medium'
-            avatar={<Avatar>+</Avatar>}
-            label={label.toUpperCase()}
-            onClick={handleClick}
+            id={label}
+            avatar={<Avatar id={label} onClick={() => handleClick(label)}>+</Avatar>}
+            label={label}
+            onClick={() => handleClick(label)}
             clickable
             style={{ backgroundColor: color }}
         />
