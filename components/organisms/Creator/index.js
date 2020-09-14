@@ -1,18 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Form from './Presentation/FormComp';
 import BrandHeading from '../../molecules/BrandHeading';
+import SnackBar from '../../atoms/SnackBar';
 import ChipComponent from '../../atoms/Chips';
 import ModalComponent from '../../atoms/Modal';
-import SnackBar from '../../atoms/SnackBar';
-import ModalForm from '../../molecules/ModalForm';
 import FORM_TEMPLATE from '../../utils/template';
+import ModalForm from '../../molecules/ModalForm';
 import { getUserId, initiateCall } from '../../utils';
 
-
-const useStyles = makeStyles({
+const createStyles = () => ({
     root: {
         width: '100%',
         flexGrow: 1,
@@ -29,107 +28,114 @@ const useStyles = makeStyles({
     }
 });
 
-const setModalForm = (modalData, modalSaveHandler, handleModalState) => {
-    if (modalData === 'INPUT') {
-        return (
-            <ModalForm
-                modalData={FORM_TEMPLATE[modalData.toUpperCase()]}
-                handleClose={handleModalState}
-                modalSaveHandler={modalSaveHandler}
-            />
-        );
-    } else {
-        return null;
-    }
-};
 
-const prepareForm = (item, type) => {
-    return (
-        {
-            type: 'input',
-            label: item.label,
-            helperText: item.helper,
-            elementType: 'text',
-            name: item.label
-        }
-    );
-};
-
-// user form to be saved from here
-const createUserFormData = (data, id, resetFormData, handleSnack) => {
-    const userData = {
-        userID: id,
-        data
-    };
-    console.log(userData, 64);
-    resetFormData();
-    initiateCall('/api/survey/save-survey', userData)
-        .then(response => console.log(response, 67));
-};
-
-
-export default function Creator() {
+class Creator extends React.Component {
     // state data
-    const [modalData, setModalData] = useState('');
-    const [formData, setFormData] = useState([]);
-    const [isModalOpen, setModalState] = useState(false);
-    const [showSnackBar, setSnackBar] = useState(false);
-    const [userId, setUserId] = useState('');
+
+    state = {
+        modalData: '',
+        formData: [],
+        isModalOpen: false,
+        userId: ''
+    };
+
+    componentDidMount = () => {
+        this.setState({ userId: getUserId(this.props.sessionData) });
+    };
+
+
+    setModalForm = modalData => {
+        if (modalData === 'INPUT') {
+            return (
+                <ModalForm
+                    modalData={FORM_TEMPLATE[modalData.toUpperCase()]}
+                    handleClose={this.handleModalState}
+                    modalSaveHandler={this.modalSaveHandler}
+                />
+            );
+        } else {
+            return null;
+        }
+    };
+
+    prepareForm = (item, type) => ({
+        type: 'input',
+        label: item.label,
+        helperText: item.helper,
+        elementType: 'text',
+        name: item.label
+    });
+
+    // user form to be saved from here
+    createUserFormData = (data, id, resetFormData) => {
+        const userData = {
+            userID: id,
+            data
+        };
+        console.log(userData, 64);
+        this.resetFormData();
+        initiateCall('/api/survey/save-survey', userData)
+            .then(response => console.log(response));
+    };
 
     // conditionally add user id
-    !userId && setUserId(getUserId());
+    // !userId && setUserId(getUserId());
 
     // handle chip click
-    const manageChipState = component => {
-        setModalData(component);
-        (component === 'INPUT') && handleModalState(true);
+    manageChipState = component => {
+        this.setState({ modalData: component });
+        (component === 'INPUT') && this.handleModalState(true);
     };
 
     // manage modal state
-    const handleModalState = modalState => setModalState(modalState);
+    handleModalState = modalState => this.setState({ isModalOpen: modalState });
 
     //manage snack bar
-    const handleSnack = () => setSnackBar(!showSnackBar);
+    //handleSnack = () => setSnackBar(!showSnackBar);
 
     // set form data
-    const handleFormData = newData => setFormData([...formData, newData]);
+    handleFormData = newData => this.setState(prevState => ({ formData: [...prevState.formData, newData] }));
 
     // manage element additions
-    const modalSaveHandler = useCallback(event => {
+    modalSaveHandler = event => {
         event.preventDefault();
         event.stopPropagation();
-        handleModalState(false);
+        this.handleModalState(false);
         const { label = '', helper = '' } = event.target || {};
-        const elementData = prepareForm({ label: label.value, helper: helper.value });
-        handleFormData(elementData);
-    }, []);
+        const elementData = this.prepareForm({ label: label.value, helper: helper.value });
+        this.handleFormData(elementData);
+    };
     // reset user form
-    const resetFormData = () => setFormData([]);
+    resetFormData = () => this.setState({ formData: [] });
     // save form data
-    const saveFormData = () => createUserFormData(formData, userId, resetFormData, handleSnack);
-    // component styles
-    const classes = useStyles();
-    return (
-        <>
-            <Grid container className={classes.root} spacing={3}>
-                <BrandHeading />
-                <Typography variant={'h6'} >Select an element to add</Typography>
-                <ChipComponent handleClick={manageChipState} count={3} />
-                {formData.length ?
-                    // preview form
-                    <Form
-                        handleReset={resetFormData}
-                        className={classes.item}
-                        handleSubmit={saveFormData}
-                        formData={formData}
-                    />
-                    : null}
-            </Grid>
-            <ModalComponent
-                handleClose={handleModalState}
-                isOpen={isModalOpen}>
-                {setModalForm(modalData, modalSaveHandler, handleModalState)}
-            </ModalComponent>
-        </>
-    );
+    saveFormData = () => this.createUserFormData(this.state.formData, this.state.userId, this.resetFormData);
+
+    render() {
+        // component styles
+        const { classes } = this.props;
+        return (
+            <>
+                <Grid container className={classes.root} spacing={3}>
+                    <BrandHeading />
+                    <Typography variant={'h6'} >Select an element to add</Typography>
+                    <ChipComponent handleClick={this.manageChipState} count={3} />
+                    {this.state.formData.length ?
+                        // preview form
+                        <Form
+                            handleReset={this.resetFormData}
+                            className={classes.item}
+                            handleSubmit={this.saveFormData}
+                            formData={this.state.formData}
+                        />
+                        : null}
+                </Grid>
+                <ModalComponent
+                    handleClose={this.handleModalState}
+                    isOpen={this.state.isModalOpen}>
+                    {this.setModalForm(this.state.modalData)}
+                </ModalComponent>
+            </>
+        );
+    }
 }
+export default withStyles(createStyles)(Creator);
