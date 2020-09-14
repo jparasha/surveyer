@@ -8,11 +8,17 @@ export const getSessionInfo = () => {
     return ({ signInText, handleSignIn, session });
 };
 
-export const getUserId = () => {
-    const [session] = useSession();
-    const { user: { image = '' } } = session || {};
-    const match = image.match('/u/(.*)?')[1];
-    return (match.substr(0, match.indexOf('?'))) || '';
+export const getUserId = sessionData => {
+    if (sessionData) {
+        const { image = '' } = sessionData;
+        const match = image.match('/u/(.*)?')[1];
+        return (match.substr(0, match.indexOf('?'))) || '';
+    } else {
+        const [session] = useSession();
+        const { user: { image = '' } } = session || {};
+        const match = image.match('/u/(.*)?')[1];
+        return (match.substr(0, match.indexOf('?'))) || '';
+    }
 };
 
 // initiate calls
