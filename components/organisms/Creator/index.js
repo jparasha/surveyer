@@ -62,7 +62,7 @@ const createUserFormData = (data, id, resetFormData, handleSnack) => {
     };
     console.log(userData);
     resetFormData();
-    (process.env.ENABLE_DB) && initiateCall(process.env.WRITE_URL, userData);
+    initiateCall(process.env.WRITE_URL, userData);
 };
 
 

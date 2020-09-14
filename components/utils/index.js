@@ -8,6 +8,8 @@ export const getSessionInfo = () => {
     return ({ signInText, handleSignIn, session });
 };
 
+const { ENABLE_DB = false } = process.env || {};
+
 export const getUserId = () => {
     const [session] = useSession();
     const { user: { image = '' } } = session || {};
@@ -17,9 +19,11 @@ export const getUserId = () => {
 
 // initiate calls
 export const initiateCall = (url = '/api/survey/save-survey', data = null) => {
-    axios.get(url, {
-        query: data
-    })
-        .then(response => response)
-        .catch(err => err);
+    if (ENABLE_DB) {
+        axios.get(url, {
+            query: data
+        })
+            .then(response => response)
+            .catch(err => err);
+    }
 };
