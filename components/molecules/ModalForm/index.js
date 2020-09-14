@@ -45,7 +45,7 @@ export default function ModalForm(props) {
             <form className={classes.flexContainer} onSubmit={props.modalSaveHandler}>
                 {modalData.map(item => getElement(item, classes))}
                 <div className={`${classes.item} ${classes.flexContainer}`} style={{ flexDirection: 'row' }}>
-                    <Button color={'secondary'} variant={'outlined'} onClick={props.handleClose} >Close</Button>
+                    <Button color={'secondary'} variant={'outlined'} onClick={() => props.handleClose(false)} >Close</Button>
                     <Button color={'primary'} type={'submit'} variant={'outlined'} >Save</Button>
                 </div>
             </form>

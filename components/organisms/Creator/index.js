@@ -64,14 +64,14 @@ const createUserFormData = (data, id, resetFormData, handleSnack) => {
     console.log(userData, 64);
     resetFormData();
     initiateCall('/api/survey/save-survey', userData)
-        .then(response => console.log(response));
+        .then(response => console.log(response, 67));
 };
 
 
 export default function Creator() {
     // state data
     const [modalData, setModalData] = useState('');
-    const [formData, setFormData] = useState({ elements: [] });
+    const [formData, setFormData] = useState([]);
     const [isModalOpen, setModalState] = useState(false);
     const [showSnackBar, setSnackBar] = useState(false);
     const [userId, setUserId] = useState('');
@@ -82,30 +82,32 @@ export default function Creator() {
     // handle chip click
     const manageChipState = component => {
         setModalData(component);
-        (component === 'INPUT') && handleModalState();
+        (component === 'INPUT') && handleModalState(true);
     };
 
     // manage modal state
-    const handleModalState = () => setModalState(!isModalOpen);
+    const handleModalState = modalState => setModalState(modalState);
 
     //manage snack bar
     const handleSnack = () => setSnackBar(!showSnackBar);
+
+    // set form data
+    const handleFormData = newData => setFormData([...formData, newData]);
 
     // manage element additions
     const modalSaveHandler = useCallback(event => {
         event.preventDefault();
         event.stopPropagation();
-        handleModalState();
+        handleModalState(false);
         const { label = '', helper = '' } = event.target || {};
         const elementData = prepareForm({ label: label.value, helper: helper.value });
-        setFormData({ elements: [...formData.elements, elementData] });
+        handleFormData(elementData);
     }, []);
-
     // reset user form
-    const resetFormData = () => setFormData({ elements: [] });
+    const resetFormData = () => setFormData([]);
     // save form data
     const saveFormData = () => createUserFormData(formData, userId, resetFormData, handleSnack);
-
+    // component styles
     const classes = useStyles();
     return (
         <>
@@ -113,12 +115,15 @@ export default function Creator() {
                 <BrandHeading />
                 <Typography variant={'h6'} >Select an element to add</Typography>
                 <ChipComponent handleClick={manageChipState} count={3} />
-                {formData.elements.length ?
+                {formData.length ?
+                    // preview form
                     <Form
                         handleReset={resetFormData}
                         className={classes.item}
                         handleSubmit={saveFormData}
-                        formData={formData} /> : null}
+                        formData={formData}
+                    />
+                    : null}
             </Grid>
             <ModalComponent
                 handleClose={handleModalState}
