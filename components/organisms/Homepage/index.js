@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import BrandHeading from '../../molecules/BrandHeading';
+import Box from '@material-ui/core/Box';
 
 
 const useStyles = makeStyles(theme => {
@@ -31,11 +32,11 @@ const useStyles = makeStyles(theme => {
 export default function HomepageComponent(props) {
     const classes = useStyles();
     return (
-        <div className={classes.rootDiv}>
+        <Box display={'flex'} flexDirection={'column'} justifyContent="center" alignContent={'center'}>
             <BrandHeading />
-            <div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
                 <Button color={'primary'} onClick={props.handleSignIn} variant={'contained'}>Login to continue!</Button>
             </div>
-        </div>
+        </Box>
     );
 }
