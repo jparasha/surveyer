@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal(props) {
-    console.log(props);
     const classes = useStyles();
     return (
         <Modal

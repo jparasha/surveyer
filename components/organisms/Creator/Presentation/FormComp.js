@@ -38,12 +38,12 @@ export default function CreatorComp(props) {
     const { formData: { elements = [] } } = props || {};
     return (
         <Grid container className={classes.root} spacing={3}>
-            <Typography variant={'h2'} >Preview</Typography>
+            <Typography variant={'h4'} >Preview</Typography>
             <Grid container className={classes.root} spacing={3}>
                 <Button className={classes.item} color={'secondary'} size={'large'} variant={'contained'} onClick={props.handleReset} >Reset</Button>
                 <Button className={classes.item} color={'primary'} size={'large'} variant={'contained'} onClick={props.handleSubmit}>Save</Button>
             </Grid>
-            <form className={classes.root} style={{ border: '2mm ridge rgba(170, 50, 220, .6)' }}>
+            <form className={classes.root} style={{ border: '2mm ridge salmon', borderRadius: 6 }}>
                 {elements.map(item => getElement(item, classes))}
             </form>
         </Grid>

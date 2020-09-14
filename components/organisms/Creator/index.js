@@ -62,8 +62,7 @@ const createUserFormData = (data, id, resetFormData, handleSnack) => {
     };
     console.log(userData);
     resetFormData();
-    //initiateCall(process.env.WRITE_URL, userData);
-    // handleSnack();
+    (process.env.ENABLE_DB) && initiateCall(process.env.WRITE_URL, userData);
 };
 
 
@@ -80,31 +79,23 @@ export default function Creator() {
     !userId && setUserId(getUserId());
 
     // handle chip click
-    const manageChipState = e => {
-        const { innerText = '' } = e.target || {};
-        // const element = FORM_TEMPLATE[innerText.toUpperCase()];
-        setModalData(innerText);
-        //setChipState({ ...chipState, [innerText]: chipState[innerText] + 1 });
-        handleModalState();
+    const manageChipState = component => {
+        setModalData(component);
+        (component === 'INPUT') && handleModalState();
     };
 
     // manage modal state
-    const handleModalState = () => {
-        console.log(isModalOpen, 'hanle modal');
-        setModalState(!isModalOpen);
-    };
+    const handleModalState = () => setModalState(!isModalOpen);
 
     //manage snack bar
     const handleSnack = () => setSnackBar(!showSnackBar);
 
     // manage element additions
     const modalSaveHandler = useCallback(event => {
-        console.log('klk');
-
         event.preventDefault();
         event.stopPropagation();
         handleModalState();
-        const { label = '', helper = 'test' } = event.target || {};
+        const { label = '', helper = '' } = event.target || {};
         const elementData = prepareForm({ label: label.value, helper: helper.value });
         setFormData({ elements: [...formData.elements, elementData] });
     }, []);
@@ -119,6 +110,7 @@ export default function Creator() {
         <>
             <Grid container className={classes.root} spacing={3}>
                 <BrandHeading />
+                <Typography variant={'h6'} >Select an element to add</Typography>
                 <ChipComponent handleClick={manageChipState} count={3} />
                 {formData.elements.length ?
                     <Form
@@ -128,10 +120,10 @@ export default function Creator() {
                         formData={formData} /> : null}
             </Grid>
             <ModalComponent
+                handleClose={handleModalState}
                 isOpen={isModalOpen}>
                 {setModalForm(modalData, modalSaveHandler, handleModalState)}
             </ModalComponent>
-            {/* <SnackBar open={showSnackBar} handleClose={handleSnack} /> */}
         </>
     );
 }

@@ -1,15 +1,25 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
+import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import BrandHeading from '../../molecules/BrandHeading';
 
 
 const useStyles = makeStyles((theme) => {
     return ({
-        root: {
+        dashBoardRoot: {
             '& > *': {
                 margin: theme.spacing(1),
             },
+            width: '100%',
+            flexGrow: 1,
+            padding: '5%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap'
         },
         extendedIcon: {
             marginRight: theme.spacing(1),
@@ -18,12 +28,6 @@ const useStyles = makeStyles((theme) => {
             position: 'fixed',
             bottom: theme.spacing(2),
             right: theme.spacing(2),
-            // background: '#ac96db',
-            // color: '#2f2727',
-            // '&:hover': {
-            //     background: '#ac96db',
-            //     color: '#2f2727',
-            // }
         }
     });
 });
@@ -33,8 +37,8 @@ export default function Dashboard(props) {
     const { name = '' } = props.sessionData || {};
     const classes = useStyles();
     return (
-        <>
-            <h1>Welcome {name}</h1>
+        <div className={classes.dashBoardRoot}>
+            <Typography variant={'h3'} component={'h1'}>Welcome {name}</Typography>
             <Fab
                 href={props.href}
                 className={classes.fab}
@@ -44,6 +48,6 @@ export default function Dashboard(props) {
                 <AddIcon className={classes.extendedIcon} />
                 Add Survey
             </Fab>
-        </>
+        </div>
     );
 }
