@@ -1,5 +1,4 @@
-import { saveToDB } from '../../../components/utils/dbUtils';
-// import { getResponseFlow } from '../../Components/utils';
+import { saveToDB, responseFlow } from '../../../components/utils/dbUtils';
 
 // read data from db
 const getData = query => {
@@ -53,8 +52,13 @@ export default (req, res) => {
         console.log(body);
         return new Promise((resolve, reject) => {
             saveToDB(body)
-                .then(() => res.send({"status" : "success"}))
-                .catch(err => res.send({"status" : "failure"}));
+                .then(data => {
+                    responseFlow(200, data, res, resolve);
+                })
+                .catch(err => {
+                    responseFlow(404, err, res, reject);
+                });
         });
     }
+    return (responseFlow(404, {}, res));
 };
