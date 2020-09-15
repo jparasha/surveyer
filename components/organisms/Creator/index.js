@@ -71,7 +71,7 @@ class Creator extends React.Component {
     });
 
     // user form to be saved from here
-    createUserFormData = (data, id, resetFormData) => {
+    createUserFormData = (data, id) => {
         const userData = {
             userID: id,
             data
@@ -83,7 +83,10 @@ class Creator extends React.Component {
                 console.log(response);
                 this.handleSnack(true, CONSTANT.SNACK_BAR.SUCCESS_MESSAGE, CONSTANT.SNACK_BAR.SUCCESS_SEVERITY);
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                this.handleSnack(true, CONSTANT.SNACK_BAR.ERROR_MESSAGE, CONSTANT.SNACK_BAR.ERROR_SEVERITY);
+            });
     };
 
 
@@ -120,7 +123,7 @@ class Creator extends React.Component {
     // reset user form
     resetFormData = () => this.setState({ formData: [] });
     // save form data
-    saveFormData = () => this.createUserFormData(this.state.formData, this.state.userId, this.resetFormData);
+    saveFormData = () => this.createUserFormData(this.state.formData, this.state.userId);
 
     render() {
         // component styles

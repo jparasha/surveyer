@@ -23,8 +23,9 @@ export const getUserId = sessionData => {
 
 // initiate calls
 export const initiateCall = (url = '/api/survey/save-survey', data = {}) => {
-    axios.post(url, { ...data })
-        .then(response => response)
-        .catch(err => err);
-
+    return new Promise((resolve, reject) => {
+        return axios.post(url, { ...data })
+            .then(response => resolve(response))
+            .catch(err => reject(err));
+    });
 };
