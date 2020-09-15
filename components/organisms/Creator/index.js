@@ -9,6 +9,7 @@ import ChipComponent from '../../atoms/Chips';
 import ModalComponent from '../../atoms/Modal';
 import FORM_TEMPLATE from '../../utils/template';
 import ModalForm from '../../molecules/ModalForm';
+import CONSTANT from '../../utils/constants';
 import { getUserId, initiateCall } from '../../utils';
 
 const createStyles = () => ({
@@ -36,7 +37,10 @@ class Creator extends React.Component {
         modalData: '',
         formData: [],
         isModalOpen: false,
-        userId: ''
+        userId: '',
+        showSnack: false,
+        snackMessage: '',
+        snackSeverity: 'success'
     };
 
     componentDidMount = () => {
@@ -75,11 +79,13 @@ class Creator extends React.Component {
         console.log(userData, 64);
         this.resetFormData();
         initiateCall('/api/survey/save-survey', userData)
-            .then(response => console.log(response));
+            .then(response => {
+                console.log(response);
+                this.handleSnack(true, CONSTANT.SNACK_BAR.SUCCESS_MESSAGE, CONSTANT.SNACK_BAR.SUCCESS_SEVERITY);
+            })
+            .catch(err => console.log(err));
     };
 
-    // conditionally add user id
-    // !userId && setUserId(getUserId());
 
     // handle chip click
     manageChipState = component => {
@@ -91,7 +97,13 @@ class Creator extends React.Component {
     handleModalState = modalState => this.setState({ isModalOpen: modalState });
 
     //manage snack bar
-    //handleSnack = () => setSnackBar(!showSnackBar);
+    handleSnack = (isEnabled, message, severity) => {
+        if (message && severity) {
+            this.setState({ showSnack: isEnabled, snackMessage: message, snackSeverity: severity });
+        } else {
+            this.setState({ showSnack: isEnabled });
+        }
+    };
 
     // set form data
     handleFormData = newData => this.setState(prevState => ({ formData: [...prevState.formData, newData] }));
@@ -134,6 +146,12 @@ class Creator extends React.Component {
                     isOpen={this.state.isModalOpen}>
                     {this.setModalForm(this.state.modalData)}
                 </ModalComponent>
+                <SnackBar
+                    handleSnack={this.handleSnack}
+                    message={this.state.snackMessage || ''}
+                    severity={this.state.snackSeverity}
+                    showSnack={this.state.showSnack}
+                />
             </>
         );
     }
