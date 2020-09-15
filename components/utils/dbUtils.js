@@ -44,7 +44,7 @@ const insertCollection = (dataBase, data = {}) => {
             .then(dataReturned => {
                 const { modifiedCount = 0, upsertedId = null, upsertedCount = 0, matchedCount = 0 } = dataReturned || {};
                 console.log(45, modifiedCount, upsertedId, upsertedCount, matchedCount, 45);
-                resolve();
+                resolve({ modifiedCount, upsertedId, upsertedCount });
             })
             .catch(e => reject(e));
     });
@@ -90,17 +90,12 @@ export const saveToDB = userData => {
                 }
                 // ****************************** CALL DB **************************//
                 const dataBase = db.db(DB_NAME);
-                // dataBase.listCollections().toArray((errd, collInfos) => {
-                //     console.log(collInfos, errd, 85);
-
-                // });
                 // ********************* INSERT COLLECTION *********************//
                 console.log('inserting collection');
                 insertCollection(dataBase, userData)
-                    .then(() => {
-                        //
+                    .then(insertionData => {
                         console.log('inserted');
-                        resolve();
+                        resolve(insertionData);
                     })
                     .catch(e => {
                         console.log(e);
@@ -111,4 +106,19 @@ export const saveToDB = userData => {
             reject(error);
         }
     });
+};
+
+export const responseFlow = (code, dbData, response, promiseHandler = null) => {
+
+    const responseData = { code, data: {}, message: 'something went wrong..' };
+
+    if (code && code >= 200 && code < 300) {
+        const { modifiedCount = 0, upsertedId = 0, upsertedCount = 0, matchedCount = 0 } = dbData || {};
+        responseData.data = { modifiedCount, upsertedId, upsertedCount, matchedCount };
+        responseData.message = 'inserted data';
+    }
+    console.log(responseData, code, 119);
+    response.statusCode = code || 500;
+    response.json(responseData);
+    promiseHandler && promiseHandler();
 };
