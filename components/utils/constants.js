@@ -12,6 +12,13 @@ const CONSTANTS = {
             CTA_TEXT: 'DESIGN NOW!',
             CARD_HREF: '/surveys/create-new'
         },
+    },
+    SNACK_BAR: {
+        ERROR_SEVERITY: 'error',
+        INFO_SEVERITY: 'info',
+        SUCCESS_SEVERITY: 'success',
+        SUCCESS_MESSAGE: 'successfully saved!',
+        ERROR_MESSAGE: 'error in submission',
     }
 };
 
