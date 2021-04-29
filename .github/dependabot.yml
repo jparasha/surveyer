@@ -1,0 +1,48 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:30"
+  open-pull-requests-limit: 10
+  reviewers:
+  - jparasha
+  assignees:
+  - jparasha
+  labels:
+  - dependency
+  ignore:
+  - dependency-name: jose
+    versions:
+    - 1.28.1
+  - dependency-name: next-auth
+    versions:
+    - 3.12.0
+    - 3.13.0
+    - 3.13.1
+    - 3.13.2
+    - 3.14.0
+    - 3.14.6
+    - 3.14.7
+    - 3.2.0
+    - 3.2.1
+    - 3.5.0
+    - 3.6.1
+    - 3.7.0
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.10
+    - 7.12.13
+    - 7.12.16
+    - 7.12.17
+    - 7.13.0
+    - 7.13.1
+    - 7.13.13
+    - 7.13.14
+    - 7.13.15
+    - 7.13.8
+  - dependency-name: mongodb
+    versions:
+    - 3.6.4
+    - 3.6.5
