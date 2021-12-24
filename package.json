@@ -19,7 +19,7 @@
     "@material-ui/lab": "4.0.0-alpha.58",
     "@material-ui/icons": "4.11.2",
     "axios": "0.24.0",
-    "mongodb": "4.2.0"
+    "mongodb": "4.2.2"
   },
   "devDependencies": {
     "@babel/core": "7.16.5",
