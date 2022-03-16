@@ -22,7 +22,7 @@
     "mongodb": "4.4.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.5",
+    "@babel/core": "7.17.7",
     "babel-jest": "27.5.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
